@@ -1,212 +1,290 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" style="scroll-behavior: smooth;">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Профессиональное управление репутацией | Отзывы и продвижение</title>
+    <title>Premium Reputation | Профессиональное продвижение</title>
+    <!-- Подключаем стильный современный шрифт -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Inter', sans-serif;
         }
 
         body {
-            background-color: #0f172a;
-            color: #f8fafc;
+            background-color: #030712;
+            color: #f3f4f6;
             line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Декоративные светящиеся сферы на фоне */
+        .bg-glow-1 {
+            position: absolute;
+            top: -100px;
+            left: -100px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(0,0,0,0) 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+        .bg-glow-2 {
+            position: absolute;
+            top: 600px;
+            right: -100px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(6, 182, 212, 0.1) 0%, rgba(0,0,0,0) 70%);
+            z-index: -1;
+            pointer-events: none;
         }
 
         header {
-            background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%);
-            padding: 80px 20px;
+            position: relative;
+            padding: 120px 20px 80px 20px;
             text-align: center;
-            border-bottom: 1px solid #1e293b;
+            background: radial-gradient(ellipse at top, #111827, #030712);
         }
 
         .container {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 40px 20px;
+            position: relative;
         }
 
         h1 {
-            font-size: 2.8rem;
+            font-size: 3.5rem;
             font-weight: 800;
-            margin-bottom: 20px;
-            background: linear-gradient(to right, #38bdf8, #818cf8);
+            letter-spacing: -0.05em;
+            margin-bottom: 24px;
+            line-height: 1.1;
+            background: linear-gradient(135deg, #ffffff 30%, #a5b4fc 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .subtitle {
-            font-size: 1.2rem;
-            color: #94a3b8;
-            max-width: 700px;
-            margin: 0 auto 40px auto;
+            font-size: 1.25rem;
+            color: #9ca3af;
+            max-width: 750px;
+            margin: 0 auto 48px auto;
+            font-weight: 400;
         }
 
         .cta-button {
             display: inline-block;
-            background: linear-gradient(to right, #2563eb, #4f46e5);
+            background: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
             color: #ffffff;
-            padding: 16px 36px;
-            font-weight: bold;
+            padding: 18px 40px;
+            font-weight: 600;
             font-size: 1.1rem;
-            border-radius: 8px;
+            border-radius: 12px;
             text-decoration: none;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             border: none;
             cursor: pointer;
-            box-shadow: 0 4px 20px rgba(79, 70, 229, 0.4);
-            text-align: center;
+            box-shadow: 0 4px 30px rgba(79, 70, 229, 0.3);
+            position: relative;
+            overflow: hidden;
         }
 
         .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 24px rgba(79, 70, 229, 0.6);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px rgba(6, 182, 212, 0.5);
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: all 0.6s;
+        }
+        .cta-button:hover::before {
+            left: 100%;
         }
 
         .section-title {
             text-align: center;
-            font-size: 2rem;
-            margin-bottom: 40px;
-            position: relative;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 60px;
+            letter-spacing: -0.03em;
+            background: linear-gradient(to right, #ffffff, #9ca3af);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 4px;
-            background: #2563eb;
-            margin: 15px auto 0 auto;
-            border-radius: 2px;
-        }
-
+        /* Премиум сетка карточек (Эффект стекла) */
         .tariffs-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-bottom: 60px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
         }
 
         .tariff-card {
-            background-color: #1e293b;
-            border: 1px solid #334155;
-            border-radius: 12px;
-            padding: 25px;
+            background: rgba(17, 24, 39, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 35px;
             text-align: center;
-            transition: transform 0.2s;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
         }
 
         .tariff-card:hover {
-            border-color: #4f46e5;
-            transform: translateY(-4px);
+            border-color: rgba(99, 102, 241, 0.4);
+            transform: translateY(-8px);
+            background: rgba(17, 24, 39, 0.9);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(79, 70, 229, 0.1);
         }
 
         .tariff-name {
-            font-size: 1.3rem;
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: #f1f5f9;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #f3f4f6;
         }
 
         .tariff-price {
-            font-size: 1.8rem;
+            font-size: 2.2rem;
             font-weight: 800;
             color: #38bdf8;
-            margin-bottom: 15px;
+            margin-bottom: 25px;
+            background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .tariff-features {
             list-style: none;
             text-align: left;
-            color: #94a3b8;
+            color: #9ca3af;
             font-size: 0.95rem;
         }
 
         .tariff-features li {
-            margin-bottom: 8px;
+            margin-bottom: 12px;
             position: relative;
-            padding-left: 20px;
+            padding-left: 28px;
         }
 
+        /* Красивые SVG иконки галочек */
         .tariff-features li::before {
-            content: '✓';
+            content: "";
             position: absolute;
             left: 0;
-            color: #34d399;
-            font-weight: bold;
+            top: 4px;
+            width: 16px;
+            height: 16px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%2334d399'%3E%3Cpath fill-rule='evenodd' d='M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z' clip-rule='evenodd'/%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
         }
 
+        /* Футуристичный Калькулятор */
         .calculator-box {
-            background: #1e293b;
-            border: 1px solid #334155;
-            border-radius: 16px;
-            padding: 40px;
-            max-width: 600px;
-            margin: 0 auto 60px auto;
+            background: rgba(17, 24, 39, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 45px;
+            max-width: 650px;
+            margin: 0 auto 80px auto;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
         }
 
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 28px;
         }
 
         label {
             display: block;
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: #cbd5e1;
+            font-weight: 500;
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+            color: #9ca3af;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
         }
 
         select, input[type="number"], input[type="text"] {
             width: 100%;
-            padding: 12px;
-            background-color: #0f172a;
-            border: 1px solid #334155;
-            border-radius: 6px;
-            color: #f8fafc;
+            padding: 16px;
+            background-color: #0b0f19;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: #ffffff;
             font-size: 1rem;
+            transition: all 0.3s ease;
         }
 
         select:focus, input:focus {
             outline: none;
-            border-color: #2563eb;
+            border-color: #6366f1;
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.2);
+            background-color: #111827;
         }
 
         .total-display {
-            background-color: #0f172a;
-            padding: 20px;
-            border-radius: 8px;
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.1) 0%, rgba(6, 182, 212, 0.05) 100%);
+            padding: 24px;
+            border-radius: 14px;
             text-align: center;
-            font-size: 1.4rem;
-            font-weight: bold;
-            margin-top: 20px;
-            border: 1px dashed #4f46e5;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-top: 35px;
+            border: 1px solid rgba(99, 102, 241, 0.2);
         }
 
         .total-price {
             color: #34d399;
-            font-size: 1.8rem;
+            font-size: 2.2rem;
+            font-weight: 800;
+            display: block;
+            margin-top: 5px;
+            text-shadow: 0 0 20px rgba(52, 211, 153, 0.3);
         }
 
         footer {
             text-align: center;
-            padding: 40px 20px;
-            color: #64748b;
-            border-top: 1px solid #1e293b;
+            padding: 50px 20px;
+            color: #4b5563;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
             font-size: 0.9rem;
+            background-color: #030712;
+        }
+
+        /* Адаптивность для мобильных телефонов */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.4rem; }
+            .section-title { font-size: 1.9rem; }
+            .calculator-box { padding: 25px; }
         }
     </style>
 </head>
 <body>
 
+    <div class="bg-glow-1"></div>
+    <div class="bg-glow-2"></div>
+
     <header>
         <div class="container">
-            <h1>Прокачайте репутацию и продажи вашего бизнеса</h1>
-            <p class="subtitle">Пишем живые отзывы на ключевых картах и платформах. Без предоплаты, без скама — оплата строго после публикации. Также удаляем негатив!</p>
+            <h1>Управление Репутацией нового уровня</h1>
+            <p class="subtitle">Размещаем органические, живые отзывы на ключевых картах и платформах. Индивидуальный подход, высокая проходимость модерации алгоритмов и абсолютная анонимность вашего бизнеса.</p>
             <a href="#order" class="cta-button">Рассчитать стоимость</a>
         </div>
     </header>
@@ -215,60 +293,58 @@
         <h2 class="section-title">Наши услуги и цены</h2>
         <div class="tariffs-grid" id="tariffs-container"></div>
 
-        <h2 class="section-title" id="order">Быстрый расчет и заказ</h2>
+        <h2 class="section-title" id="order">Интерактивный расчет</h2>
         <div class="calculator-box">
             <form id="orderForm" onsubmit="handleOrder(event)">
                 <div class="form-group">
-                    <label for="platformSelect">Выберите нужную услугу:</label>
+                    <label for="platformSelect">Выберите нужную услугу</label>
                     <select id="platformSelect" onchange="calculateTotal()"></select>
                 </div>
 
                 <div class="form-group">
-                    <label for="quantityInput">Количество (шт.):</label>
+                    <label for="quantityInput">Количество (шт.)</label>
                     <input type="number" id="quantityInput" value="1" min="1" oninput="calculateTotal()">
                 </div>
 
                 <div class="form-group">
-                    <label for="clientName">Ваше имя:</label>
-                    <input type="text" id="clientName" required placeholder="Иван">
+                    <label for="clientName">Ваше имя</label>
+                    <input type="text" id="clientName" required placeholder="Константин">
                 </div>
 
                 <div class="form-group">
-                    <label for="clientContact">Ваш Telegram или Телефон для связи:</label>
+                    <label for="clientContact">Ваш Telegram или Телефон для связи</label>
                     <input type="text" id="clientContact" required placeholder="@username или +7...">
                 </div>
 
                 <div class="total-display">
-                    Итоговая стоимость: <span class="total-price" id="totalPriceDisplay">0 ₽</span>
+                    Итоговый бюджет:
+                    <span class="total-price" id="totalPriceDisplay">0 ₽</span>
                 </div>
 
-                <button type="submit" id="submitBtn" class="cta-button" style="width: 100%; margin-top: 25px;">Заказать продвижение</button>
+                <button type="submit" id="submitBtn" class="cta-button" style="width: 100%; margin-top: 30px;">Запустить продвижение</button>
             </form>
         </div>
     </div>
 
     <footer>
-        <p>&copy; 2026 Управление Репутацией. Честные условия, гарантия на публикацию, всегда на связи.</p>
+        <p>&copy; 2026 Управление Репутацией. Высококлассный сервис, полная конфиденциальность, всегда на связи.</p>
     </footer>
 
     <script>
         const SITE_DATA = {
             platforms: [
-                { id: 'yandex', name: 'Отзыв: Yandex Browser', price: 400, features: ['Согласование текста', 'Фото по желанию', 'Оплата после публикации'] },
-                { id: 'google', name: 'Отзыв: Google Maps', price: 350, features: ['Без предоплаты', 'Гарантия на публикацию', 'Обсуждение текста'] },
-                { id: 'gis', name: 'Отзыв: 2ГИС', price: 350, features: ['Высокая проходимость', 'Оплата по факту', 'Фото по желанию'] },
-                { id: 'flamp', name: 'Отзыв: Flamp', price: 300, features: ['Естественный стиль', 'Без рисков и скама', 'Проверка перед оплатой'] },
-                { id: 'zoon', name: 'Отзыв: Zoon', price: 300, features: ['Быстрое размещение', 'Прогретые аккаунты', 'Полный контроль текстов'] },
-                { id: 'vk', name: 'Отзыв: ВКонтакте', price: 250, features: ['Реальные профили', 'Без предоплаты', 'Согласование контента'] },
-                { id: 'avito_pf', name: 'Накрутка ПФ Авито (подписки, избранное, просмотры)', price: 7.5, features: ['Имитация действий', 'Рост объявлений в выдаче', 'Сообщения/звонки рассчитываются отдельно'] },
-                { id: 'del_maps', name: 'Удаление отзыва (Яндекс/2ГИС/Google/ВК)', price: 3500, features: ['Оплата после исчезновения', 'Законные методы', 'Полная анонимность'] },
-                { id: 'del_avito', name: 'Удаление отзыва с Авито', price: 4300, features: ['Оплата строго за результат', 'Чистка вашей репутации', 'Без предоплат'] }
+                { id: 'yandex', name: 'Отзыв: Yandex Browser', price: 400, features: ['Согласование текста перед размещением', 'Добавление фото по желанию', 'Учет внутренних алгоритмов'] },
+                { id: 'google', name: 'Отзыв: Google Maps', price: 350, features: ['Индивидуальные тексты', 'Полная гарантия на публикацию', 'Обсуждение деталей перед стартом'] },
+                { id: 'gis', name: 'Отзыв: 2ГИС', price: 350, features: ['Высокая проходимость фильтров', 'Естественные профили пользователей', 'Фото по вашему желанию'] },
+                { id: 'flamp', name: 'Отзыв: Flamp', price: 300, features: ['Органический стиль изложения', 'Без шаблонных фраз', 'Надежное ручное размещение'] },
+                { id: 'zoon', name: 'Отзыв: Zoon', price: 300, features: ['Оперативное выполнение задачи', 'Прогретые аккаунты авторов', 'Полный контроль содержания'] },
+                { id: 'vk', name: 'Отзыв: ВКонтакте', price: 250, features: ['Реальные активные профили', 'Согласование контента', 'Повышение лояльности аудитории'] },
+                { id: 'avito_pf', name: 'Накрутка ПФ Авито (просмотры, избранное)', price: 7.5, features: ['Имитация действий живых клиентов', 'Вывод объявлений в топ органики', 'Доп. опции обсуждаются отдельно'] },
+                { id: 'del_maps', name: 'Удаление отзыва (Яндекс/2ГИС/Google/ВК)', price: 3500, features: ['Эффективные законные методы аргументации', 'Полная анонимность процесса', 'Защита вашего рейтинга'] },
+                { id: 'del_avito', name: 'Удаление отзыва с Авито', price: 4300, features: ['Профессиональное оспаривание негатива', 'Быстрая очистка репутации аккаунта', 'Конфиденциально'] }
             ]
         };
 
-        // ==========================================
-        // НАСТРОЙКА ТЕЛЕГРАМА (ДАННЫЕ УЖЕ ВСТАВЛЕНЫ)
-        // ==========================================
         const TG_TOKEN = "8506492146:AAF6px0IXy4s63oFYbjpdv0KmnD-MXZFcHw"; 
         const TG_CHAT_ID = "1257029251"; 
 
@@ -288,7 +364,7 @@
 
                 card.innerHTML = `
                     <div class="tariff-name">${p.name}</div>
-                    <div class="tariff-price">${p.price} ₽ <span style="font-size:1rem; font-weight:normal; color:#94a3b8;">/ шт.</span></div>
+                    <div class="tariff-price">${p.price} ₽ <span style="font-size:1rem; font-weight:normal; color:#6b7280;">/ шт.</span></div>
                     <ul class="tariff-features">${featuresHtml}</ul>
                 `;
                 container.appendChild(card);
@@ -317,7 +393,7 @@
             
             const btn = document.getElementById('submitBtn');
             btn.disabled = true;
-            btn.textContent = 'Отправка...';
+            btn.textContent = 'Обработка платежа и отправка...';
 
             const platformId = document.getElementById('platformSelect').value;
             const selectedPlatform = SITE_DATA.platforms.find(p => p.id === platformId);
@@ -326,13 +402,13 @@
             const contact = document.getElementById('clientContact').value;
             const total = selectedPlatform ? selectedPlatform.price * quantity : 0;
 
-            const text = `🚀 *Новая заявка на сайте!*\n\n` +
-                         `👤 *Имя клиента:* ${name}\n` +
+            const text = `🚀 *Новый заказ в системе!*\n\n` +
+                         `👤 *Клиент:* ${name}\n` +
                          `📞 *Связь:* ${contact}\n` +
                          `🪐 *Услуга:* ${selectedPlatform.name}\n` +
                          `📊 *Количество:* ${quantity} шт.\n` +
-                         `💰 *Итоговая сумма:* ${total} ₽\n\n` +
-                         `⚡️ _Клиент ждет ответа!_`;
+                         `💰 *Итоговый чек:* ${total} ₽\n\n` +
+                         `⚡️ _Срочно свяжитесь для уточнения ТЗ!_`;
 
             const url = `https://api.telegram.org/bot${TG_TOKEN}/sendMessage`;
 
@@ -347,19 +423,19 @@
             })
             .then(response => {
                 if (response.ok) {
-                    alert('Заявка успешно отправлена! Я свяжусь с вами в ближайшее время.');
+                    alert('Ваша заявка успешно зарегистрирована в системе! Мы свяжемся с вами в течение нескольких минут.');
                     document.getElementById('orderForm').reset();
                     calculateTotal();
                 } else {
-                    alert('Ошибка конфигурации Telegram. Убедитесь, что вы активировали бота кнопкой Старт.');
+                    alert('Ошибка конфигурации Telegram. Пожалуйста, убедитесь, что бот активирован на вашей стороне.');
                 }
             })
             .catch(error => {
-                alert('Ошибка сети. Проверьте интернет-соединение.');
+                alert('Сбой сети на локальном устройстве. Запустите файл через локальный веб-сервер или хостинг.');
             })
             .finally(() => {
                 btn.disabled = false;
-                btn.textContent = 'Заказать продвижение';
+                btn.textContent = 'Запустить продвижение';
             });
         }
 
